@@ -8,6 +8,14 @@
 from itemadapter import ItemAdapter
 
 
-class BooksPipeline:
+# class BooksPipeline:
+#     def process_item(self, item, spider):
+#         return item
+class PriceConverterPipeline(object):
+
+    exchange_rate = 8.8075
+
     def process_item(self, item, spider):
+        price = float(item['price'][1:]) * self.exchange_rate
+        item['price'] = '¥%.2f' % price
         return item
